@@ -24,4 +24,7 @@
     -fx-text-alignment: center;
     -fx-backgroundcolor: #d0f3d0
 }
+.border{
+    -fx-backgroundcolor: #434343
+}
 

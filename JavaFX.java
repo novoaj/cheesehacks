@@ -7,15 +7,15 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
+import javafx.scene.paint.Color;
 
 public class JavaFX extends Application {
     private Button[][] gameBoard;
@@ -223,10 +223,15 @@ public class JavaFX extends Application {
         BorderPane.setMargin(left, inset);
         BorderPane.setMargin(right, inset);
         BorderPane.setMargin(top, inset);
+        // border.setBackground(new Background(new BackgroundFill(Color.BLUE, new
+        // CornerRadii(0), Insets.EMPTY)));
 
-        Group group = new Group(border);// , label);// , circle, polygon);
+        // Group group = new Group(border);// , label);// , circle, polygon);
 
-        Scene scene = new Scene(group, 550, 400);
+        // Scene scene = new Scene(group, 550, 400);
+        Scene scene = new Scene(border, 550, 400);
+        scene.setFill(Color.web("#81c483"));
+
         scene.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
@@ -249,7 +254,7 @@ public class JavaFX extends Application {
     }
 
     private void gameOver() {
-        // popup message with rematch option
+        // popup message with rematch option?
         // reset
         reset();
     }
