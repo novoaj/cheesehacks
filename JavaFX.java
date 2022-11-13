@@ -216,6 +216,12 @@ public class JavaFX extends Application {
         left.getChildren().add(reset);
         top.setAlignment(Pos.CENTER);
         top.getChildren().add(label);
+
+        label.setTextFill(Color.WHITE); // color labels
+        scoreboard.setTextFill(Color.WHITE);
+        scoreX.setTextFill(Color.WHITE);
+        scoreO.setTextFill(Color.WHITE);
+
         right.getChildren().addAll(scoreboard, scoreX, scoreO);
         border.setTop(top);
         border.setLeft(left);
@@ -227,12 +233,12 @@ public class JavaFX extends Application {
         // CornerRadii(0), Insets.EMPTY)));
 
         // Group group = new Group(border);// , label);// , circle, polygon);
-
+        border.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, new CornerRadii(0), Insets.EMPTY)));
         // Scene scene = new Scene(group, 550, 400);
-        Scene scene = new Scene(border, 550, 400);
-        scene.setFill(Color.web("#81c483"));
+        Scene scene = new Scene(border, 500, 350);
 
         scene.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
+        scene.setFill(Color.web("#81c483"));
         stage.setScene(scene);
         stage.show();
     }
@@ -257,6 +263,15 @@ public class JavaFX extends Application {
         // popup message with rematch option?
         // reset
         reset();
+        // Button gameOver = new Button("rematch?");
+        // gameOver.setOnAction((ActionEvent e) -> {
+        // reset();
+        // });
+        // for (int i = 0; i < 3; i++) {
+        // for (int j = 0; j < 3; j++) {
+
+        // }
+        // }
     }
 
     public static void main(String[] args) {
