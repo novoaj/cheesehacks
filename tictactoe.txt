@@ -1,9 +1,6 @@
-Classes
-    Main class that will iniitalize the GUI with a blank grid
-    Class "object": classes Circle and X that inherit from object
-    We can keep track of the values in the grid with a 2d array
-        This will help us determine when the game is over, who the winner is etc
 
     Additional ideas:
         maybe storing user information in a seperate file: info like wins and name
-        
+
+    
+
