@@ -17,6 +17,7 @@ import javafx.scene.shape.Polygon;
 
 public class JavaFX extends Application {
     private Button[][] gameBoard;
+    private Label label;
     private boolean playerX;
     private boolean playerO; // true if it is their turn
     private int playerXturns;
@@ -25,6 +26,81 @@ public class JavaFX extends Application {
     private int playerOwins;
 
     private boolean isWinner() {
+        if (playerX) {
+            // check diagonals
+            if (gameBoard[0][0].getText() == "X" && gameBoard[1][1].getText() == "X"
+                    && gameBoard[2][2].getText() == "X") {
+                return true;
+            }
+            if (gameBoard[0][2].getText() == "X" && gameBoard[1][1].getText() == "X"
+                    && gameBoard[2][0].getText() == "X") {
+                // gameBoard[0][2].setText("wtf");
+                return true;
+            }
+            // check columns
+            if (gameBoard[0][0].getText() == "X" && gameBoard[0][1].getText() == "X"
+                    && gameBoard[0][2].getText() == "X") {
+                return true;
+            }
+            if (gameBoard[1][0].getText() == "X" && gameBoard[1][1].getText() == "X"
+                    && gameBoard[1][2].getText() == "X") {
+                return true;
+            }
+            if (gameBoard[2][0].getText() == "X" && gameBoard[2][1].getText() == "X"
+                    && gameBoard[2][2].getText() == "X") {
+                return true;
+            }
+            // check rows
+            if (gameBoard[0][0].getText() == "X" && gameBoard[1][0].getText() == "X"
+                    && gameBoard[2][0].getText() == "X") {
+                return true;
+            }
+            if (gameBoard[0][1].getText() == "X" && gameBoard[1][1].getText() == "X"
+                    && gameBoard[2][1].getText() == "X") {
+                return true;
+            }
+            if (gameBoard[0][2].getText() == "X" && gameBoard[1][2].getText() == "X"
+                    && gameBoard[2][2].getText() == "X") {
+                return true;
+            }
+        } else if (playerO) {
+            if (gameBoard[0][0].getText() == "O" && gameBoard[1][1].getText() == "O"
+                    && gameBoard[2][2].getText() == "O") {
+                return true;
+            }
+            if (gameBoard[0][2].getText() == "O" && gameBoard[1][1].getText() == "O"
+                    && gameBoard[2][0].getText() == "O") {
+                // gameBoard[0][2].setText("wtf");
+                return true;
+            }
+            // check columns
+            if (gameBoard[0][0].getText() == "O" && gameBoard[0][1].getText() == "O"
+                    && gameBoard[0][2].getText() == "O") {
+                return true;
+            }
+            if (gameBoard[1][0].getText() == "O" && gameBoard[1][1].getText() == "O"
+                    && gameBoard[1][2].getText() == "O") {
+                return true;
+            }
+            if (gameBoard[2][0].getText() == "O" && gameBoard[2][1].getText() == "O"
+                    && gameBoard[2][2].getText() == "O") {
+                return true;
+            }
+            // check rows
+            if (gameBoard[0][0].getText() == "O" && gameBoard[1][0].getText() == "O"
+                    && gameBoard[2][0].getText() == "O") {
+                return true;
+            }
+            if (gameBoard[0][1].getText() == "O" && gameBoard[1][1].getText() == "O"
+                    && gameBoard[2][1].getText() == "O") {
+                return true;
+            }
+            if (gameBoard[0][2].getText() == "O" && gameBoard[1][2].getText() == "O"
+                    && gameBoard[2][2].getText() == "O") {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -32,7 +108,7 @@ public class JavaFX extends Application {
     public void start(final Stage stage) {
         // update this method definition to complete the First JavaFX Activity
         stage.setTitle("TicTacToe");
-        Label label = new Label("Turn: X");
+        label = new Label("Turn: X");
 
         BorderPane border = new BorderPane();
 
@@ -60,7 +136,6 @@ public class JavaFX extends Application {
                     // if X is playing
 
                     if (playerX) {
-                        // check that this btn's text is " "
                         if (btn.getText() == "   ") {
                             btn.setText("X");
 
@@ -68,27 +143,41 @@ public class JavaFX extends Application {
                             // check for winner or if board is filled up
                             if (isWinner()) {
                                 playerXwins++;
+                                scoreX.setText("playerX: " + playerXwins);
+                                // end game? reset?
+                                gameOver();
+                            } else {
+                                // change label and end turn by flipping boolean vals
+                                playerO = true;
+                                playerX = false;
+                                label.setText("Turn: O");
                             }
-                            playerO = true;
-                            playerX = false;
-                            label.setText("Turn: O");
-                            // change label and end turn by flipping boolean vals
 
+                            if (playerXturns + playerOturns == 9) {
+                                gameOver();
+                            }
                         }
                     }
                     // if O is playing
                     else {
                         if (btn.getText() == "   ") {
                             btn.setText("O");
-
                             playerOturns++;
                             // check for winner or if board is filled up
                             if (isWinner()) {
                                 playerOwins++;
+                                scoreO.setText("playerO: " + playerOwins);
+                                // end game? reset?
+                                gameOver();
+                            } else {
+                                playerO = false;
+                                playerX = true;
+                                label.setText("Turn: X");
                             }
-                            playerO = false;
-                            playerX = true;
-                            label.setText("Turn: X");
+
+                            if (playerXturns + playerOturns == 9) {
+                                gameOver();
+                            }
                             // last: change label and end turn by flipping boolean vals
                         }
 
@@ -131,12 +220,19 @@ public class JavaFX extends Application {
                 b.setText("   ");
             }
         }
+        // reset labels and booleans, x always starts
+        playerX = true;
+        playerO = false;
+        playerXturns = 0;
+        playerOturns = 0;
+        label.setText("Turn: X");
 
     }
 
     private void gameOver() {
         // popup message with rematch option
-
+        // reset
+        reset();
     }
 
     public static void main(String[] args) {
