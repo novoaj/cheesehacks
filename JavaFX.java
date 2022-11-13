@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -203,6 +204,9 @@ public class JavaFX extends Application {
         Button reset = new Button("reset board");
         reset.getStyleClass().removeAll("button");
         reset.getStyleClass().add("resetButton");
+        reset.setStyle("-fx-alignment: center;");
+        reset.setPrefWidth(80);
+        reset.setPrefHeight(25);
         reset.setOnAction((ActionEvent e) -> {
             if (reset.getText() == "reset board") {
                 reset();
@@ -210,6 +214,7 @@ public class JavaFX extends Application {
         });
 
         left.getChildren().add(reset);
+        top.setAlignment(Pos.CENTER);
         top.getChildren().add(label);
         right.getChildren().addAll(scoreboard, scoreX, scoreO);
         border.setTop(top);
@@ -217,10 +222,11 @@ public class JavaFX extends Application {
         border.setRight(right);
         BorderPane.setMargin(left, inset);
         BorderPane.setMargin(right, inset);
+        BorderPane.setMargin(top, inset);
 
         Group group = new Group(border);// , label);// , circle, polygon);
 
-        Scene scene = new Scene(group, 500, 500);
+        Scene scene = new Scene(group, 550, 400);
         scene.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
