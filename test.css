@@ -1,9 +1,25 @@
-body{
-    background-color:cyan;
+.button{
+    -fx-background-color:#90EE90;
+    -fx-text-alignment: center;
 }
-h1{
-    text-align: center;
+.button:hover{
+
+    -fx-background-color:#64EE64;
+    -fx-text-alignment: center;
 }
-h2{
-    text-align: center;
+.resetButton{
+    -fx-background-color: 
+        #f5fff5;
+    -fx-background-radius: 10;
+    -fx-text-fill: black;
+    -fx-text-alignment: center;
 }
+.resetButton:hover{
+    -fx-background-color:#bdcdbd;
+    -fx-text-alignment: center;
+    -fx-border-radius: 100%;
+}
+.label{
+    -fx-text-alignment: center;
+}
+

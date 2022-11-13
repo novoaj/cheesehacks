@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -111,7 +112,8 @@ public class JavaFX extends Application {
         label = new Label("Turn: X");
 
         BorderPane border = new BorderPane();
-
+        Insets inset = new Insets(10);
+        border.setPadding(inset);
         // init private fields
         gameBoard = new Button[3][3];
         playerX = true;
@@ -120,6 +122,9 @@ public class JavaFX extends Application {
         playerOturns = 0;
         playerXwins = 0;
         playerOwins = 0;
+
+        // maybe a welcome screen or something
+
         Label scoreboard = new Label("Score:");
         Label scoreX = new Label("playerX: " + playerXwins);
         Label scoreO = new Label("playerO: " + playerOwins);
@@ -128,7 +133,9 @@ public class JavaFX extends Application {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 Button btn = new Button("   ");
-                btn.setStyle("-fx-font-size:50");
+                btn.setStyle("-fx-font-size:45");
+                btn.setPrefWidth(100.0);
+                btn.setMaxWidth(100.0);
                 gridPane.add(btn, i, j);
                 gameBoard[i][j] = btn;
 
@@ -186,12 +193,16 @@ public class JavaFX extends Application {
 
             }
         }
+        gridPane.setVgap(12);
+        gridPane.setHgap(12); // spacing between buttons (pxls)
 
         border.setCenter(gridPane);
         HBox top = new HBox();
         VBox right = new VBox();
         VBox left = new VBox();
         Button reset = new Button("reset board");
+        reset.getStyleClass().removeAll("button");
+        reset.getStyleClass().add("resetButton");
         reset.setOnAction((ActionEvent e) -> {
             if (reset.getText() == "reset board") {
                 reset();
@@ -204,11 +215,13 @@ public class JavaFX extends Application {
         border.setTop(top);
         border.setLeft(left);
         border.setRight(right);
+        BorderPane.setMargin(left, inset);
+        BorderPane.setMargin(right, inset);
 
         Group group = new Group(border);// , label);// , circle, polygon);
 
         Scene scene = new Scene(group, 500, 500);
-
+        scene.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

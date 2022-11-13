@@ -1,6 +1,8 @@
 
     Additional ideas:
         maybe storing user information in a seperate file: info like wins and name
+        animations when a player wins: something simple like drawing a line through the grid
+        option to play against a computer or against yourself
 
     
 
