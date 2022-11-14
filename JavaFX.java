@@ -26,6 +26,8 @@ public class JavaFX extends Application {
     private int playerOturns;
     private int playerXwins;
     private int playerOwins;
+    private Scene scene;
+    private BorderPane border;
 
     private boolean isWinner() {
         if (playerX) {
@@ -72,7 +74,6 @@ public class JavaFX extends Application {
             }
             if (gameBoard[0][2].getText() == "O" && gameBoard[1][1].getText() == "O"
                     && gameBoard[2][0].getText() == "O") {
-                // gameBoard[0][2].setText("wtf");
                 return true;
             }
             // check columns
@@ -108,11 +109,10 @@ public class JavaFX extends Application {
 
     @Override
     public void start(final Stage stage) {
-        // update this method definition to complete the First JavaFX Activity
         stage.setTitle("TicTacToe");
         label = new Label("Turn: X");
 
-        BorderPane border = new BorderPane();
+        border = new BorderPane();
         Insets inset = new Insets(10);
         border.setPadding(inset);
         // init private fields
@@ -235,7 +235,7 @@ public class JavaFX extends Application {
         // Group group = new Group(border);// , label);// , circle, polygon);
         border.setBackground(new Background(new BackgroundFill(Color.DARKBLUE, new CornerRadii(0), Insets.EMPTY)));
         // Scene scene = new Scene(group, 550, 400);
-        Scene scene = new Scene(border, 500, 350);
+        scene = new Scene(border, 500, 350);
 
         scene.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
         scene.setFill(Color.web("#81c483"));
@@ -262,11 +262,14 @@ public class JavaFX extends Application {
     private void gameOver() {
         // popup message with rematch option?
         // reset
-        reset();
-        // Button gameOver = new Button("rematch?");
+        Button gameOver = new Button("rematch?");
+
+        // border.getChildren().addAll(gameOver);
         // gameOver.setOnAction((ActionEvent e) -> {
         // reset();
         // });
+        reset();
+
         // for (int i = 0; i < 3; i++) {
         // for (int j = 0; j < 3; j++) {
 
